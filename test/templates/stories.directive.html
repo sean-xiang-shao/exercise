@@ -1,0 +1,85 @@
+<h4 class="display-4 text-center mb-2">Online Stories Recommendation List</h4>
+<div class="text-center mb-3">
+    <span>
+        <button ng-click="sc.openAdd()">Add a new story</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="seachText" type="search" ng-keyup="sc.hitEnterKey($event)">
+        <button id="searchButton" ng-click="sc.search()">Search</button>
+        <button ng-click="sc.clearSearch()">Clear</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button ng-show="sc.showSelectTwo" ng-click="sc.showCheckBox()">Select two stories to compare</button>
+    </span>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Key Words</th>
+          <th>Publisher</th>
+          <th>Updated Recommendating Time</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+    </thead>   
+    <tbody>
+        <tr name="display_stories" ng-show="sc.displayStories" ng-repeat="story in sc.storiesDisplay">
+            <td>
+                <span id="name_{{$index}}" class="show">{{story.name}}</span>
+                <input type="text" id="update_name_{{$index}}" class="hidden">
+            </td>
+            <td>
+                <span id="author_{{$index}}" class="show">{{story.author}}</span>
+                <input type="text" id="update_author_{{$index}}" class="hidden">
+            </td>
+            <td>
+                <span id="keyWords_{{$index}}" class="show">{{story.keyWords}}</span>
+                <input type="text" id="update_keyWords_{{$index}}" class="hidden">
+            </td>
+            <td>
+                <span id="publisher_{{$index}}" class="show">{{story.publisher}}</span>
+                <input type="text" id="update_publisher_{{$index}}" class="hidden">
+            </td>
+            <td>
+                <span id="lastUpdated_{{$index}}" class="show">{{story.lastUpdated}}</span>
+                <button id="update_{{$index}}" class="hidden" ng-click="sc.updateStory(story, $index)">Update</button>
+                &nbsp;&nbsp;<button id="cancel_{{$index}}" class="hidden" ng-click="sc.cancelUpdate($index)">Cancel</button>
+            </td>
+            <td>
+                <button id="delete_{{$index}}" ng-click="sc.deleteStory(story, $index)" class="show">Delete</button>
+            </td>
+            <td>
+                <button id="edit_{{$index}}" ng-show="sc.edit" ng-click="sc.openUpdate(story, $index)" class="show">Edit</button>
+            </td>
+            <td>
+                <button id="copy_{{$index}}" ng-click="sc.cloneStory(story)" class="show">Copy</button>
+            </td>
+            <td>
+                <input type="checkbox" id="checkbox_{{$index}}" ng-click="sc.handleStoriesToCompare(story, $index)" ng-show="sc.checkToSelect">
+            </td>
+        </tr>
+
+        <tr name="create_new_story" ng-show="sc.create">
+            <td><input type="text" id="newName"></td>
+            <td><input type="text" id="newAuthor"></td>
+            <td><input type="text" id="newKeyWords"></td>
+            <td><input type="text" id="newPublisher"></td>
+            <td>
+                <button ng-click="sc.addStory()">Add</button>&nbsp;&nbsp;
+                <button ng-click="sc.resetAdd()">Reset</button>
+            </td>   
+        </tr>
+
+        <tr name="cpmpare_two_stories" ng-show="sc.compareTwo" ng-repeat="story in sc.recordsToBeCompared">
+            <td>{{story.name}}</td>
+            <td class="greenbkgd" id="compare_author_{{$index}}">{{story.author}}</td>
+            <td class="greenbkgd" id="compare_kw_{{$index}}">{{story.keyWords}}</td>
+            <td class="greenbkgd" id="compare_publisher_{{$index}}">{{story.publisher}}</td>
+            <td>{{story.lastUpdated}}</td>   
+        </tr>
+    </tbody>
+</table>
+<span ng-bind="sc.errorMessage" class="error"></span>
+
