@@ -127,7 +127,8 @@
             }
             sc.ind = -1;
             sc.edit = true;   
-            clearCheckboxes();        
+            clearCheckboxes();    
+            sc.showSelectTwo = sc.storiesDisplay.length > 2 ? true : false;    
         }
 
         function hitEnterKey(event) {  
@@ -151,6 +152,7 @@
             sc.ind = -1;
             sc.edit = true;    
             clearCheckboxes();
+            sc.showSelectTwo = sc.storiesDisplay.length > 2 ? true : false;
         }
 
         function openAdd() {
