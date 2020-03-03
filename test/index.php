@@ -29,7 +29,7 @@
      ?>
       <h4 class="display-4 text-center mb-5">Status data at a glance</h4>
       <div class="row">
-      <?php foreach($statuses as $s): 
+      <?php foreach($statuses as $s) {
           $color = "green";
           $status = $s->status;
           if($status === "fail") {
@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-         <?php endforeach; ?>	 
+      <?php } ?>	 
       </div>
     </div>
     
